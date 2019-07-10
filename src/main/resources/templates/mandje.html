@@ -9,13 +9,13 @@
 </head>
 <body>
     <nav th:replace="fragments::nav"></nav>
-    <form th:action="@{/mandje/verwijder}" method="post">
-    <ul class="list-group"th:each="film:${filmsinmandje}">
+    <form th:action="@{/mandje/verwijder}" method="post" enctype="text/plain">
 
-        <li  th:text="|${film.titel}, ${film.prijs}|"class="list-group-item d-flex justify-content-between align-items-center">
+        <div th:each="film:${filmsinmandje}">
+        <li   th:text="|${film.titel}, ${film.prijs}|"class="list-group-item d-flex justify-content-between align-items-center">
         </li>
          <input type="checkbox" th:name="${film.id}" th:value="${film.id}">
-    </ul>
+        </div>
         <button type="submit" class="btn btn-danger">Verwijderen</button>
     </form>
 </div>
