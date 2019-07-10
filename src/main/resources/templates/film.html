@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${film.titel}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav th:replace="fragments::nav"></nav>
+<div class="card col-lg-4" style="width: 18rem;">
+    <img th:src="@{/images/{id}.jpg (id=${film.id})}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${film.titel}"></h5>
+        <h3 th:text="${film.prijs}"></h3>
+        <hr>
+        <form th:action="@{/mandje}" method="post">
+            <input type="hidden" th:value="${film.id}" name="id">
+            <button th:if="${film.isBeschikbaar()}" class="btn btn-primary" type="submit">Smijt in mandje</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
