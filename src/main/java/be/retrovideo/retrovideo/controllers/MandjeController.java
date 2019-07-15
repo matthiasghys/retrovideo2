@@ -4,8 +4,10 @@ import be.retrovideo.retrovideo.domain.Film;
 import be.retrovideo.retrovideo.services.FilmService;
 import be.retrovideo.retrovideo.sessions.Mandje;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,8 +41,13 @@ public class MandjeController {
 
     public @PostMapping("/verwijder")
 
-    String verwijder(Long id){
-        mandje.verwijder(id);
+    String verwijder(@RequestBody MultiValueMap<String, String> formData){
+        for (List<String> values : formData.values()){
+           for(String value: values){
+
+               mandje.verwijder( Long.valueOf(value));
+           }
+        }
         return "redirect:/mandje";
     }
 }

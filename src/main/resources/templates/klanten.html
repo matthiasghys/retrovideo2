@@ -1,0 +1,45 @@
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Klanten</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav th:replace="fragments::nav"></nav>
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Klanten</h1>
+    </div>
+</div>
+<div class="row">
+    <p class="col-lg-4">Familienaam bevat</p>
+    <form method="get" th:action="@{/klanten/zoeken}" th:object="${searchForm}">
+        <input th:field="*{zoekterm}" type="text" name="zoekterm" id="zoekterm" required>
+        <button type="submit" class="btn btn-primary">Zoeken</button>
+    </form>
+</div>
+
+<div th:if="${zoekresultaten} != null">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Straat - Huisnummer</th>
+            <th scope="col">Postcode</th>
+            <th scope="col">Gemeente</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="zoek:${zoekresultaten}" >
+            <td ><a th:href="@{/reserveren/{id} (id=${zoek.getId()})}" th:text="|${zoek.getVoorNaam()} ${zoek.getFamilieNaam()}|"></a></td>
+            <td th:text="${zoek.getStraatNummer()}"></td>
+            <td th:text="${zoek.getPostcode()}"></td>
+            <td th:text="${zoek.getGemeente()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

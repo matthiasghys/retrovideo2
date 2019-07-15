@@ -1,5 +1,7 @@
 package be.retrovideo.retrovideo.sessions;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -12,6 +14,8 @@ import java.util.Set;
 public class Mandje implements Serializable {
     private static final long serialVersionUID = 1L;
     private final Set<Long> ids = new LinkedHashSet<>();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     public void voegToe(long id){
         ids.add(id);
@@ -26,5 +30,9 @@ public class Mandje implements Serializable {
     }
     public boolean bevat(long id) {
         return ids.contains(id);
+    }
+
+    public int aantalFilmsInMandje(){
+        return ids.size();
     }
 }
