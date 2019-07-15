@@ -1,6 +1,5 @@
 package be.retrovideo.retrovideo.repositories;
 
-import be.retrovideo.retrovideo.domain.Klant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +22,7 @@ public class JdbcKlantRepositoryTest extends AbstractTransactionalJUnit4SpringCo
     @Autowired
     private KlantRepository repository;
 
-    @Test
-    public void findAll(){
-        assertThat(repository.findAll())
-                .hasSize(super.countRowsInTable("klanten"))
-                .extracting(Klant::getId).isSorted();
-    }
+
 
 
     @Test
