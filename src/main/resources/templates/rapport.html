@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Retrovideo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+<nav th:replace="fragments::nav"></nav>
+<div th:if="${slechteFilms.isEmpty()}" class="row">
+    <p>De Reservatie is oke!</p>
+</div>
+<div class="row" th:if=" ! ${slechteFilms.isEmpty()}">
+    <p>Rervatie mislukt voor de volgende films:</p>
+    <ul >
+        <li th:each="film : ${slechteFilms}" th:text="${film.titel}"></li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

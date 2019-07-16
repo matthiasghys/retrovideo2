@@ -22,11 +22,17 @@ public class JdbcKlantRepositoryTest extends AbstractTransactionalJUnit4SpringCo
     @Autowired
     private KlantRepository repository;
 
-
-
-
     @Test
     public void findByZoekterm(){
         assertThat(repository.findByZoekterm("test")).isEqualTo("test");
     }
+
+    long idVanTestKlant(){
+        return super.jdbcTemplate.queryForObject("select id from klanten where voornaam = 'test'", Long.class);
+    }
+    @Test
+    public void findById(){
+        assertThat(repository.findById(idVanTestKlant()).get().getVoorNaam()).isEqualTo("test");
+    }
+
 }
